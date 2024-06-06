@@ -50,19 +50,20 @@ const startProcessing = () => {
   };
   
   const processProducts = (products, discountCategory, discountRate) => {
-    let newList = []
+    let newList = [];
     for (i=0; i < products.length; i++){
-        let object1 = {}
+        let product = {};
         if (products[i].quantity !== 0) {
-            object1.name = products[i].name
-            object1.category = products[i].category
+            product.name = products[i].name;
+            product.category = products[i].category;
+            const newPrice = (products[i].price * products[i].quantity);
             if (products[i].category === discountCategory) {
-            object1.discountedTotalValue = (products[i].price * products[i].quantity)-((products[i].price * products[i].quantity)*discountRate)
+              product.discountedTotalValue = (newPrice)-(newPrice * discountRate);
             } else{
-                object1.discountedTotalValue = products[i].price * products[i].quantity
-            }
-    newList.push(object1)
+              product.discountedTotalValue = newPrice;
+            };
+    newList.push(product);
         }    
     }
-    return newList
+    return newList;
   };
